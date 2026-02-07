@@ -1,0 +1,442 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\begin{document}
+
+\section*{\textbf{CSE400: Fundamentals of Probability in Computing}}
+
+\subsection*{\textbf{Lecture Scribe 5: Bayes’ Theorem, Random Variables, and Probability Mass Function (PMF)}}
+
+\textbf{Instructor:} Dhaval Patel, PhD \\
+\textbf{Date:} January 20, 2026
+
+\hrule
+\vspace{1em}
+
+\subsection*{\textbf{1. Outline}}
+
+This lecture covers the following topics:
+
+\begin{enumerate}
+    \item Bayes’ Theorem
+    \begin{itemize}
+        \item Weighted Average of Conditional Probabilities
+        \item Learning by Example
+        \item Formal Introduction: Law of Total Probability and Bayes Theorem
+    \end{itemize}
+
+    \item Random Variables
+    \begin{itemize}
+        \item Motivation and Concept
+        \item Examples
+    \end{itemize}
+
+    \item Probability Mass Function (PMF)
+    \begin{itemize}
+        \item Concept and Examples
+    \end{itemize}
+
+    \item Class Participation Quiz
+\end{enumerate}
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{2. Bayes’ Theorem}}
+
+\subsection*{\textbf{2.1 Weighted Average of Conditional Probabilities}}
+
+Let $A$ and $B$ be events. We may express $A$ as:
+
+\[
+A = AB \cup AB^c
+\]
+
+This is because for an outcome to be in $A$, it must either be in both $A$ and $B$, or be in $A$ but not in $B$.
+
+Since $AB$ and $AB^c$ are mutually exclusive, by \textbf{Axiom 3}, we have:
+
+\[
+Pr(A) = Pr(AB) + Pr(AB^c)
+\]
+
+Using conditional probability form:
+
+\[
+Pr(A) = Pr(A|B)Pr(B) + Pr(A|B^c)[1 - Pr(B)]
+\]
+
+\subsubsection*{\textbf{Key Result}}
+
+The probability of event $A$ is a \textbf{weighted average} of conditional probabilities, where the weights are given by the probability of the event on which it is conditioned.
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{3. Bayes’ Theorem: Learning by Example}}
+
+\subsection*{\textbf{3.1 Example 3.1 (Part 1/2)}}
+
+An insurance company believes that people can be divided into two classes:
+
+\begin{itemize}
+    \item Accident prone
+    \item Not accident prone
+\end{itemize}
+
+The statistics show:
+
+\begin{itemize}
+    \item An accident-prone person will have an accident within 1 year with probability $0.4$
+    \item A not accident-prone person will have an accident within 1 year with probability $0.2$
+\end{itemize}
+
+Assume $30\%$ of the population is accident prone.
+
+\subsubsection*{\textbf{Question}}
+
+What is the probability that a new policyholder will have an accident within a year of purchasing a policy?
+
+\subsubsection*{\textbf{Solution}}
+
+Let:
+
+\begin{itemize}
+    \item $A_1$ denote the event that the policyholder will have an accident within a year
+    \item $A$ denote the event that the policyholder is accident prone
+\end{itemize}
+
+Then:
+
+\[
+Pr(A_1) = Pr(A_1|A)Pr(A) + Pr(A_1|A^c)Pr(A^c)
+\]
+
+Substituting values:
+
+\[
+Pr(A_1) = (0.4)(0.3) + (0.2)(0.7)
+\]
+
+\[
+= 0.26
+\]
+
+\subsubsection*{\textbf{Final Answer}}
+
+\[
+Pr(A_1) = 0.26
+\]
+
+\subsection*{\textbf{3.2 Example 3.1 (Part 2/2)}}
+
+Suppose that a new policyholder has an accident within a year of purchasing a policy.
+
+\subsubsection*{\textbf{Question}}
+
+What is the probability that he or she is accident prone?
+
+\subsubsection*{\textbf{Solution}}
+
+The desired probability is:
+
+\[
+Pr(A|A_1) = \frac{Pr(AA_1)}{Pr(A_1)}
+\]
+
+Using:
+
+\[
+Pr(AA_1) = Pr(A)Pr(A_1|A)
+\]
+
+Thus:
+
+\[
+Pr(A|A_1) = \frac{Pr(A)Pr(A_1|A)}{Pr(A_1)}
+\]
+
+Substituting:
+
+\[
+Pr(A|A_1) = \frac{(0.3)(0.4)}{0.26}
+\]
+
+\[
+= \frac{6}{13}
+\]
+
+\subsubsection*{\textbf{Final Answer}}
+
+\[
+Pr(A|A_1) = \frac{6}{13}
+\]
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{4. Formal Introduction: Law of Total Probability and Bayes Formula}}
+
+\subsection*{\textbf{4.1 Law of Total Probability (Formula 3.4)}}
+
+This is known as the \textbf{law of total probability}.
+
+\subsection*{\textbf{4.2 Bayes Formula (Proposition 3.1)}}
+
+Using:
+
+\[
+Pr(AB_i) = Pr(B_i|A)Pr(A)
+\]
+
+we get the Bayes Formula.
+
+This is known as the \textbf{Bayes Formula (Proposition 3.1)}.
+
+\subsubsection*{\textbf{Interpretation}}
+
+\begin{itemize}
+    \item $Pr(B_i)$ is the \textbf{apriori probability} (probabilities formed from self-evident or presupposed models)
+    \item $Pr(B_i|A)$ is the \textbf{posteriori probability} (probabilities derived or calculated after observing certain events) of event $B_i$ given $A$
+\end{itemize}
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{5. Bayes Formula: Learning by Example}}
+
+\subsection*{\textbf{5.1 Example 3.2}}
+
+Suppose we have 3 cards that are identical in form, except:
+
+\begin{itemize}
+    \item Both sides of the first card are red
+    \item Both sides of the second card are black
+    \item One side of the third card is red and the other side is black
+\end{itemize}
+
+The 3 cards are mixed up in a hat, and 1 card is randomly selected and put down on the ground.
+
+If the upper side of the chosen card is colored red, what is the probability that the other side is colored black?
+
+\subsubsection*{\textbf{Solution}}
+
+Let:
+
+\begin{itemize}
+    \item $RR$: chosen card is all red
+    \item $BB$: chosen card is all black
+    \item $RB$: chosen card is red-black
+    \item $R$: upturned side of chosen card is red
+\end{itemize}
+
+We need:
+
+\[
+Pr(RB|R)
+\]
+
+Using conditional probability:
+
+\[
+Pr(RB|R) = \frac{Pr(RB \cap R)}{Pr(R)}
+\]
+
+\[
+= \frac{Pr(R|RB)Pr(RB)}{Pr(R|RR)Pr(RR) + Pr(R|RB)Pr(RB) + Pr(R|BB)Pr(BB)}
+\]
+
+Substitute probabilities:
+
+\[
+= \frac{(1/2)(1/3)}{(1)(1/3) + (1/2)(1/3) + (0)(1/3)}
+\]
+
+\[
+= \frac{1}{3}
+\]
+
+\subsubsection*{\textbf{Final Answer}}
+
+\[
+Pr(RB|R) = \frac{1}{3}
+\]
+
+\subsubsection*{\textbf{Incorrect Reasoning Mentioned}}
+
+Many incorrectly guess $1/2$ by assuming that the two possibilities (all-red and red-black) are equally likely. This is incorrect because the outcomes are not equally likely.
+
+If each card is treated as two distinct sides, then there are 6 equally likely outcomes:
+
+\[
+R_1, R_2, B_1, B_2, R_3, B_3
+\]
+
+Since the other side is black only if the outcome is $R_3$, the desired probability equals the conditional probability of $R_3$ given that either $R_1$, $R_2$, or $R_3$ occurred, which equals:
+
+\[
+\frac{1}{3}
+\]
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{6. Random Variables}}
+
+\subsection*{\textbf{6.1 Motivation and Concept}}
+
+When an experiment is performed, we are frequently interested mainly in some function of the outcome rather than the actual outcome itself.
+
+\subsubsection*{\textbf{Experiment 1}}
+
+In dice tossing, the focus is often on the sum of the two dice rather than the individual values.
+
+\subsubsection*{\textbf{Experiment 2}}
+
+When flipping a coin, the interest may lie in the total number of heads without focusing on the exact head-tail sequence.
+
+These real-valued functions defined on the sample space are known as \textbf{Random Variables}.
+
+\begin{itemize}
+    \item Values are determined by the outcomes of an experiment.
+    \item Probabilities are assigned to possible values of random variables.
+\end{itemize}
+
+\subsection*{\textbf{6.2 Visualization of Distribution}}
+
+The distribution of a random variable can be visualized as a bar diagram:
+
+\begin{itemize}
+    \item The x-axis represents the values the random variable can take on.
+    \item The height of the bar at value $a$ is the probability:
+\end{itemize}
+
+\[
+Pr[X = a]
+\]
+
+Each probability can be computed by looking at the probability of the corresponding event in the sample space.
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{7. Random Variables: Examples}}
+
+\subsection*{\textbf{7.1 Example 1 (Three Fair Coin Tosses)}}
+
+Suppose the experiment consists of tossing 3 fair coins.
+
+Let $Y$ denote the number of heads that appear.
+
+Then $Y$ is a random variable taking values:
+
+\[
+0, 1, 2, 3
+\]
+
+with probabilities:
+
+\[
+P\{Y = 0\} = P\{(t,t,t)\} = \frac{1}{8}
+\]
+
+\[
+P\{Y = 1\} = P\{(t,t,h),(t,h,t),(h,t,t)\} = \frac{3}{8}
+\]
+
+\[
+P\{Y = 2\} = P\{(t,h,h),(h,t,h),(h,h,t)\} = \frac{3}{8}
+\]
+
+\[
+P\{Y = 3\} = P\{(h,h,h)\} = \frac{1}{8}
+\]
+
+Since $Y$ must take one of the values $0$ through $3$, we must have:
+
+\[
+\sum_y P(Y=y) = 1
+\]
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{8. Probability Mass Function (PMF)}}
+
+\subsection*{\textbf{8.1 Discrete Random Variable}}
+
+A random variable that can take on at most a countable number of possible values is said to be \textbf{discrete}.
+
+\subsection*{\textbf{8.2 Definition of Probability Mass Function}}
+
+Let $X$ be a discrete random variable with range:
+
+\[
+R_X = x_1, x_2, x_3, \dots
+\]
+
+(finite or countably infinite).
+
+The function:
+
+\[
+p(x) = Pr(X=x)
+\]
+
+is called the \textbf{Probability Mass Function (PMF)} of $X$.
+
+Since $X$ must take one of the values $x_k$, we have:
+
+\[
+\sum_k p(x_k) = 1
+\]
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{9. PMF Examples}}
+
+\subsection*{\textbf{9.1 Example: Two Independent Tosses of a Fair Coin}}
+
+(Example is included as shown in lecture material.)
+
+\subsection*{\textbf{9.2 Example: PMF Given in Exponential Form}}
+
+The probability mass function of a random variable $X$ is given by:
+
+\[
+p(i) = c\lambda^i,\quad i = 0,1,2,\dots
+\]
+
+where $\lambda$ is some positive value.
+
+\subsubsection*{\textbf{Question}}
+
+Find:
+
+\begin{enumerate}
+    \item $P\{X=0\}$
+    \item $P\{X>2\}$
+\end{enumerate}
+
+(As per lecture material, the example is included exactly as written.)
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{10. Class Participation}}
+
+Students are instructed to switch to \textbf{Campuswire} for class participation and discussion.
+
+\hrule
+\vspace{1em}
+
+\section*{\textbf{End of Lecture Scribe 5}}
+
+\textbf{Topic Coverage Completed:} \\
+Bayes’ Theorem, Law of Total Probability, Bayes Formula, Random Variables, PMF.
+
+\end{document}
