@@ -1,0 +1,174 @@
+\documentclass[11pt]{article}
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+
+% ===================== HEADER & FOOTER =====================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSE 400: Fundamentals of Probability in Computing}
+\rhead{Lecture 5 Scribe}
+\cfoot{\thepage}
+
+% ===================== TITLE =====================
+\title{
+\normalsize School of Engineering and Applied Science (SEAS), Ahmedabad University\\
+\vspace{0.2cm}
+\textbf{CSE 400: Fundamentals of Probability in Computing}\\
+\Large Lecture 5: Bayes' Theorem, Random Variables, and PMF
+}
+\author{}
+
+\date{January 20, 2026}
+
+\begin{document}
+\maketitle
+\vspace{-1.5cm}
+
+\begin{center}
+\begin{tabular}{ll}
+\textbf{Instructor:} & Dhaval Patel, PhD \\[1ex]
+\textbf{Purpose:} & Exam-oriented reference material
+\end{tabular}
+\end{center}
+
+\hrule
+\vspace{0.5cm}
+
+% ===================== CONTENT =====================
+
+\section{Bayes' Theorem}
+
+\subsection{Weighted Average of Conditional Probabilities}
+Let $A$ and $B$ be events. Event $A$ can be decomposed as
+\[
+A = (A \cap B) \cup (A \cap B^c),
+\]
+where the events $(A \cap B)$ and $(A \cap B^c)$ are mutually exclusive.  
+By Axiom 3 (additivity),
+\[
+\Pr(A) = \Pr(A \cap B) + \Pr(A \cap B^c).
+\]
+
+Using conditional probability,
+\[
+\Pr(A \cap B) = \Pr(A \mid B)\Pr(B), \quad
+\Pr(A \cap B^c) = \Pr(A \mid B^c)\Pr(B^c).
+\]
+
+Hence,
+\[
+\Pr(A) = \Pr(A \mid B)\Pr(B) + \Pr(A \mid B^c)[1 - \Pr(B)].
+\]
+Thus, $\Pr(A)$ is a weighted average of conditional probabilities.
+
+\subsection{Example 3.1 (Part 1)}
+An insurance company classifies people as accident-prone ($A$) or not ($A^c$).  
+Let $B$ denote the event that a policyholder has an accident within one year.  
+Using total probability,
+\[
+\Pr(B) = \Pr(B \mid A)\Pr(A) + \Pr(B \mid A^c)\Pr(A^c).
+\]
+
+\subsection{Example 3.1 (Part 2)}
+Given that an accident occurred, we compute
+\[
+\Pr(A \mid B) = \frac{\Pr(B \mid A)\Pr(A)}{\Pr(B)}.
+\]
+
+\section{Law of Total Probability and Bayes Formula}
+
+Let $\{B_1, B_2, \dots, B_n\}$ be a partition of the sample space with $\Pr(B_i) > 0$.
+
+\subsection*{Law of Total Probability}
+\[
+\Pr(A) = \sum_{i=1}^{n} \Pr(A \mid B_i)\Pr(B_i).
+\]
+
+\subsection*{Bayes Formula (Proposition 3.1)}
+\[
+\Pr(B_i \mid A) =
+\frac{\Pr(A \mid B_i)\Pr(B_i)}
+{\sum_{j=1}^{n} \Pr(A \mid B_j)\Pr(B_j)}.
+\]
+
+Here, $\Pr(B_i)$ is the \textit{a priori} probability and $\Pr(B_i \mid A)$ is the \textit{posteriori} probability.
+
+\subsection{Example 3.2 (Cards Problem)}
+Three cards: RR, RB, BB, each chosen with probability $1/3$.  
+Let $R$ denote the event that the upper side is red.
+\[
+\Pr(R) = \Pr(R \mid RR)\Pr(RR) + \Pr(R \mid RB)\Pr(RB) + \Pr(R \mid BB)\Pr(BB).
+\]
+\[
+\Pr(R) = (1)\left(\frac{1}{3}\right) + \left(\frac{1}{2}\right)\left(\frac{1}{3}\right) + (0)\left(\frac{1}{3}\right)
+= \frac{1}{2}.
+\]
+
+\section{Random Variables}
+A random variable is a real-valued function defined on the sample space.  
+Interest often lies in a function of the outcome rather than the outcome itself.
+
+\subsection*{Examples}
+\begin{itemize}
+\item Sum of two dice
+\item Number of heads in repeated coin tosses
+\end{itemize}
+
+The distribution can be visualized using a bar diagram with height $\Pr(X = x)$ at value $x$.
+
+\subsection{Example: Three Coin Tosses}
+Let $X$ denote the number of heads in three fair coin tosses.
+
+\section{Probability Mass Function (PMF)}
+A random variable taking at most countably many values is called discrete.
+
+Let $X$ have range $R_X = \{x_1, x_2, \dots\}$.  
+The probability mass function is defined as
+\[
+p(x_k) = \Pr(X = x_k).
+\]
+
+\subsection*{Properties}
+\[
+p(x_k) \ge 0, \quad \sum_k p(x_k) = 1.
+\]
+
+\subsection{PMF Example}
+Given a random variable $Y$ with
+\[
+\Pr(Y=0)=\frac{1}{8}, \quad \Pr(Y=1)=\frac{3}{8}, \quad
+\Pr(Y=2)=\frac{3}{8}, \quad \Pr(Y=3)=\frac{1}{8},
+\]
+we verify
+\[
+\sum_{k=0}^{3} \Pr(Y=k) = 1.
+\]
+
+\subsection{Poisson Distribution}
+Let
+\[
+p(i) = c\frac{\lambda^i}{i!}, \quad i=0,1,2,\dots, \ \lambda>0.
+\]
+Since
+\[
+\sum_{i=0}^{\infty} p(i) = 1 \implies c e^{\lambda} = 1 \implies c = e^{-\lambda},
+\]
+we obtain
+\[
+\Pr(X=0)=e^{-\lambda}, \quad
+\Pr(X>2)=1-\sum_{i=0}^{2} e^{-\lambda}\frac{\lambda^i}{i!}.
+\]
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.2cm}
+\begin{center}
+\small \textit{End of Lecture 5 Scribe}
+\end{center}
+
+\end{document}
