@@ -1,0 +1,26 @@
+This is the Prompt which I used:- 
+
+I am providing two files: 1) L5_A_S1.pdf – this contains
+the Lecture 5 content. 2) Perfect_Example_Scribe.pdf –
+this shows the structure and format to follow. Please
+generate a lecture scribe that can be used as closednotes exam reference material. Use L5_A_S1.pdf strictly
+for the content and Perfect_Example_Scribe.pdf strictly
+for the structure. Follow the same section layout as the
+example scribe, including Definitions and Notation,
+Assumptions, Theorems / Results, Proofs / Derivations,
+Worked Examples, and Conclusion. Include all
+definitions, notation, conditions, assumptions,
+theorems, results, proofs, derivations, and solved
+examples exactly as they appear in the lecture
+material, showing steps only up to where they are
+provided. Do not use any outside knowledge. Do not
+add explanations, intuition, summaries,
+interpretations, or new examples. Do not complete
+missing proofs or derivations—if steps are not given,
+simply mention that they are omitted. Do not guess or
+invent content. Ignore pictures and non-formal
+material. Avoid phrases like “from the slide.” Maintain a
+formal academic tone and organize everything clearly
+so it can be used directly for closed-notes exam
+revision. Output only the lecture scribe in plain text
+format
