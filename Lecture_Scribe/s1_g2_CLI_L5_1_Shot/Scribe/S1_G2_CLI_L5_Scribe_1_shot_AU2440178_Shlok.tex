@@ -1,0 +1,177 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{CSE400 – Fundamentals of Probability in Computing}}\\[4pt]
+{\large Lecture 5: Bayes’ Theorem, Random Variables, and Probability Mass Function}\\[4pt]
+Date: January 20, 2026
+\end{center}
+
+\section*{Definitions and Notation}
+
+\subsection*{Events}
+Let $A$ and $B$ be events.
+
+\subsection*{Event Decomposition}
+\[
+A = AB \cup AB^{c}
+\]
+
+\subsection*{Conditional Probability}
+\[
+\Pr(A \mid B), \quad \Pr(A \mid B^{c})
+\]
+
+\subsection*{Random Variable}
+A real-valued function defined on the sample space. Values are determined by outcomes of an experiment. Probabilities are assigned to possible values of random variables.
+
+\subsection*{Discrete Random Variable}
+A random variable that can take on at most a countable number of possible values.
+
+\subsection*{Range of a Discrete Random Variable}
+Let $X$ be a discrete random variable with range
+\[
+R_X = \{x_1, x_2, x_3, \dots\}
+\]
+(finite or countably infinite).
+
+\subsection*{Probability Mass Function (PMF)}
+The function
+\[
+p(x_k) = \Pr(X = x_k)
+\]
+is called the \textbf{Probability Mass Function (PMF)} of $X$.
+
+\section*{Assumptions}
+\begin{itemize}[leftmargin=1.5em]
+\item Events $AB$ and $AB^{c}$ are mutually exclusive.
+\item Axiom 3 of probability applies for mutually exclusive events.
+\item Probabilities of all possible values of a discrete random variable sum to 1.
+\item Coins and cards mentioned in examples are fair unless stated otherwise.
+\end{itemize}
+
+\section*{Theorems / Results}
+
+\subsection*{Weighted Average of Conditional Probabilities}
+For events $A$ and $B$,
+\[
+\Pr(A) = \Pr(AB) + \Pr(AB^{c})
+\]
+\[
+\Pr(A) = \Pr(A \mid B)\Pr(B) + \Pr(A \mid B^{c})[1 - \Pr(B)]
+\]
+
+\subsection*{Law of Total Probability (Formula 3.4)}
+If $\{B_i\}$ forms a partition of the sample space, then
+\[
+\Pr(A) = \sum_i \Pr(AB_i)
+\]
+
+\subsection*{Bayes Formula (Proposition 3.1)}
+Using
+\[
+\Pr(AB_i) = \Pr(B_i \mid A)\Pr(A)
+\]
+we get
+\[
+\Pr(B_i \mid A) =
+\frac{\Pr(A \mid B_i)\Pr(B_i)}{\sum_j \Pr(A \mid B_j)\Pr(B_j)}
+\]
+
+\section*{Proofs / Derivations}
+
+\subsection*{Weighted Average of Conditional Probabilities}
+Since
+\[
+A = AB \cup AB^{c}
+\]
+and $AB$ and $AB^{c}$ are mutually exclusive,
+\[
+\Pr(A) = \Pr(AB) + \Pr(AB^{c})
+\]
+
+Using conditional probability definitions,
+\[
+\Pr(AB) = \Pr(A \mid B)\Pr(B)
+\]
+\[
+\Pr(AB^{c}) = \Pr(A \mid B^{c})\Pr(B^{c})
+\]
+
+Thus,
+\[
+\Pr(A) = \Pr(A \mid B)\Pr(B) + \Pr(A \mid B^{c})[1 - \Pr(B)]
+\]
+
+\subsection*{Bayes Formula}
+Substitution into the law of total probability yields the Bayes Formula. Further derivation steps are omitted.
+
+\section*{Worked Examples}
+
+\subsection*{Example 3.1 (Part 1)}
+\[
+\Pr(\text{accident} \mid \text{accident prone}) = 0.4
+\]
+\[
+\Pr(\text{accident} \mid \text{not accident prone}) = 0.2
+\]
+\[
+\Pr(\text{accident prone}) = 0.3
+\]
+
+Let $A_1$: accident within a year, $A$: accident prone.
+
+\[
+\Pr(A_1) = (0.4)(0.3) + (0.2)(0.7) = 0.26
+\]
+
+\subsection*{Example 3.1 (Part 2)}
+\[
+\Pr(A \mid A_1) = \frac{(0.3)(0.4)}{0.26} = \frac{6}{13}
+\]
+
+\subsection*{Example 3.2 (Cards)}
+\[
+\Pr(RB \mid R) =
+\frac{(1/2)(1/3)}{(1)(1/3) + (1/2)(1/3) + (0)(1/3)} = \frac{1}{3}
+\]
+
+\section*{Random Variable Example}
+
+Experiment: Tossing 3 fair coins.
+
+\[
+\Pr(Y=0)=\frac{1}{8},\quad
+\Pr(Y=1)=\frac{3}{8},\quad
+\Pr(Y=2)=\frac{3}{8},\quad
+\Pr(Y=3)=\frac{1}{8}
+\]
+
+\[
+\sum_{y=0}^{3}\Pr(Y=y)=1
+\]
+
+\section*{PMF Example}
+
+\[
+p(i)=c\lambda^i,\quad i=0,1,2,\dots
+\]
+
+Find $\Pr(X=0)$ and $\Pr(X>2)$. Steps are stated in the lecture material; derivations are omitted.
+
+\section*{Conclusion}
+
+\begin{itemize}[leftmargin=1.5em]
+\item Probability of an event can be expressed as a weighted average of conditional probabilities.
+\item Law of Total Probability and Bayes Formula relate conditional and marginal probabilities.
+\item Random variables map outcomes to real values.
+\item Discrete random variables are characterized by probability mass functions.
+\end{itemize}
+
+\end{document}
