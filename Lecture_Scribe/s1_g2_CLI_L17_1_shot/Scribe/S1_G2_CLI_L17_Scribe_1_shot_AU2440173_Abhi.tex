@@ -1,0 +1,200 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Lecture Scribe}
+\author{Course: CSE400 – Fundamentals of Probability in Computing}
+\date{Lecture: L17 \\ Topic: Joint Random Variables and Joint Distributions \\ Instructor: Dhaval Patel, PhD \\ Date: March 10, 2026}
+
+\begin{document}
+
+\maketitle
+\noindent\rule{\linewidth}{0.4pt}
+\section{Definitions and Notation}
+
+\textbf{Joint Random Variables}
+
+In many applications, two or more random variables are considered simultaneously.\\
+Examples of random variables considered jointly:
+
+\begin{itemize}
+\item $X =$ Vehicle Speed
+\item $Y =$ Traffic Density
+\item $X =$ Signal-to-Noise Ratio (SNR)
+\item $Y =$ Data Throughput
+\item $X =$ Rainfall
+\item $Y =$ Temperature
+\item $X =$ Wind Speed
+\item $Y =$ Delivery Time
+\item $X, Y =$ outcomes of rolling two dice
+\end{itemize}
+\noindent\rule{\linewidth}{0.4pt}
+\textbf{Joint Probability Mass Function (Discrete Case)}
+
+For discrete random variables $X$ and $Y$, the joint PMF represents the probability that $X$ and $Y$ simultaneously take specific values.\\
+{Notation:}
+
+\[
+p_{X,Y}(x,y) = P(X = x, Y = y)
+\]
+\newpage
+{Representation:}
+
+\begin{itemize}
+\item Joint PMF Table Representation
+\end{itemize}
+\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Joint Probability Density Function (Continuous Case)}
+
+For continuous random variables $X$ and $Y$, the joint distribution is described using a \textbf{joint probability density function}.\\
+Notation:
+\[
+f_{X,Y}(x,y)
+\]
+\noindent\rule{\linewidth}{0.4pt}
+\textbf{Joint Cumulative Distribution Function}
+
+The joint CDF of two random variables $X$ and $Y$ is defined as
+
+\[
+F_{X,Y}(x,y) = P(X \le x, Y \le y)
+\]
+\noindent\rule{\linewidth}{0.4pt}
+\section{Assumptions}
+
+Situations involving multiple random variables may include relationships or correlations between the variables.
+
+Examples provided in the lecture include:
+
+\begin{itemize}
+\item Vehicle speed and traffic density
+\item Signal-to-noise ratio and throughput
+\item Rainfall and temperature
+\item Wind speed and delivery time
+\end{itemize}
+\noindent\rule{\linewidth}{0.4pt}
+\section{Theorem / Results}
+
+\textbf{Joint PMF Representation}\\
+
+A joint PMF may be represented in tabular form where:
+
+\begin{itemize}
+\item rows correspond to values of $X$
+\item columns correspond to values of $Y$
+\item table entries represent $P(X=x, Y=y)$
+\end{itemize}
+\noindent\rule{\linewidth}{0.4pt}
+\textbf{Joint CDF Definition}\\
+$F(x,y) = P(X \le x, Y \le y)$\\
+\noindent\rule{\linewidth}{0.4pt}
+\textbf{Joint CDF -- Continuous Case}
+
+The joint CDF for continuous random variables is obtained from the joint PDF.\\
+\noindent\rule{\linewidth}{0.4pt}
+\textbf{Joint CDF -- Discrete Case}
+
+For discrete random variables, the joint CDF is obtained from the joint PMF.\\
+\noindent\rule{\linewidth}{0.4pt}
+\textbf{Properties of the Joint CDF}
+
+The lecture introduces properties associated with the joint cumulative distribution function.\\
+\noindent\rule{\linewidth}{0.4pt}
+\section{Proof / Derivation}
+
+No explicit proofs or derivations are formally written in the provided lecture slides.\\
+\noindent\rule{\linewidth}{0.4pt}
+\section{Worked Examples}
+
+\textbf{Example 1 -- Smart Transportation}
+
+Random variables:
+
+\begin{itemize}
+\item $X =$ Vehicle Speed
+\item $Y =$ Traffic Density
+\end{itemize}
+
+Question:
+
+Can speed be high when the traffic density is also high?
+
+This illustrates correlated random variables.\\
+\noindent\rule{\linewidth}{0.4pt}
+\textbf{Example 2 -- Wireless Network Performance}
+
+Random variables:
+
+\begin{itemize}
+\item $X =$ Signal-to-Noise Ratio (SNR)
+\item $Y =$ Data Throughput
+\end{itemize}
+
+Question:
+
+If SNR is high, will throughput always be high?\\
+\noindent\rule{\linewidth}{0.4pt}
+\newpage
+\textbf{Example 3 -- Weather Prediction}
+
+Random variables:
+
+\begin{itemize}
+\item $X =$ Rainfall
+\item $Y =$ Temperature
+\end{itemize}
+
+Application: weather forecasting.\\
+\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Example 4 -- Drone Delivery}
+
+Random variables:
+
+\begin{itemize}
+\item $X =$ Wind Speed
+\item $Y =$ Delivery Time
+\end{itemize}
+
+Application: logistics and UAV systems.\\
+\noindent\rule{\linewidth}{0.4pt}
+
+\textbf{Example 5 -- Rolling Two Dice}
+
+Two random variables:
+
+\begin{itemize}
+\item $X =$ outcome of first die
+\item $Y =$ outcome of second die
+\end{itemize}
+
+\textbf{Example conditions:}
+
+\begin{itemize}
+\item $X + Y = 7$
+\item $X > Y$
+\end{itemize}
+
+Joint PMF is required for such events.\\
+\noindent\rule{\linewidth}{0.4pt}
+
+
+\section{Conclusion}
+
+The lecture introduces:
+
+\begin{itemize}
+\item Joint random variables
+\item Joint PMF for discrete variables
+\item Joint PDF for continuous variables
+\item Joint Cumulative Distribution Function
+\item Applications involving multiple random variables
+\end{itemize}
+\noindent\rule{\linewidth}{0.4pt}
+\begin{center}
+\textbf{End of Lecture Scribe}
+\end{center}
+\end{document}
