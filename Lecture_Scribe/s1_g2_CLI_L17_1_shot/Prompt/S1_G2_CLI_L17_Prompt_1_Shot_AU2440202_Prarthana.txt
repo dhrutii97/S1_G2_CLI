@@ -1,0 +1,2 @@
+Prompt for Lecture 17 Scribe:
+ Using the same structure as the example above, generate a lecture scribe for the provided context. The scribe should be written as exam-oriented reference material. Use only the provided lecture slides. Include content only if it appears in the lecture material. Do not add new examples, explanations, intuition, or interpretations. Give topics-wise proper content.
