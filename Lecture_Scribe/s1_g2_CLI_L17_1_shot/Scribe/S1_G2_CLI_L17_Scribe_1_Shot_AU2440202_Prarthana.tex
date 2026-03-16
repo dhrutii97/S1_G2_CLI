@@ -1,0 +1,413 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{geometry}
+
+\geometry{margin=1in}
+
+\title{Lecture Scribe}
+\date{}
+
+\begin{document}
+
+\maketitle
+\textbf{Course:} CSE400 – Fundamentals of Probability in Computing\\
+\textbf{Lecture:} L15–L18\\
+\textbf{Topic:} Joint Random Variables, Joint Distributions, and Examples\\
+\textbf{Instructor:} Dhaval Patel, PhD\\
+\textbf{Institution:} SEAS, Ahmedabad University\\
+\textbf{Date:} March 10, 2026
+
+\hrule
+\vspace{0.5cm}
+
+\section*{1. Preliminaries}
+
+\subsection*{Definitions Introduced in the Lecture}
+
+\subsubsection*{Joint Random Variables}
+
+When \textbf{two or more random variables are considered simultaneously}, they are called \textbf{joint random variables}.
+
+Example representation:
+
+\begin{itemize}
+\item $X$ = first random variable
+\item $Y$ = second random variable
+\end{itemize}
+
+These variables may be \textbf{correlated} or dependent on each other.
+
+\subsection*{Notation and Symbols}
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Symbol & Meaning \\
+\midrule
+$X$ & First random variable \\
+$Y$ & Second random variable \\
+$p_{X,Y}(x,y)$ & Joint Probability Mass Function \\
+$f_{X,Y}(x,y)$ & Joint Probability Density Function \\
+$F_{X,Y}(x,y)$ & Joint Cumulative Distribution Function \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\hrule
+\vspace{0.5cm}
+
+\section*{2. Model Assumptions and Setup}
+
+\subsection*{Motivation for Studying Joint Random Variables}
+
+In many real-world systems, \textbf{multiple random variables occur simultaneously}, and their relationships must be analyzed together.
+
+\subsection*{Examples Given in the Lecture}
+
+\subsubsection*{Smart Transportation}
+
+Random variables:
+
+\begin{itemize}
+\item $X$ = Vehicle Speed
+\item $Y$ = Traffic Density
+\end{itemize}
+
+Question considered:
+
+\begin{itemize}
+\item Can vehicle speed be high when traffic density is high?
+\end{itemize}
+
+Observation:
+
+\begin{itemize}
+\item $X$ and $Y$ are \textbf{correlated random variables}.
+\end{itemize}
+
+Applications:
+
+\begin{itemize}
+\item Adaptive traffic signals
+\item Congestion prediction
+\item Autonomous vehicle routing
+\end{itemize}
+
+\subsubsection*{Wireless Network Performance}
+
+Random variables:
+
+\begin{itemize}
+\item $X$ = Signal-to-Noise Ratio (SNR)
+\item $Y$ = Data Throughput
+\end{itemize}
+
+Observation:
+
+\begin{itemize}
+\item Throughput depends on SNR.
+\end{itemize}
+
+Question considered:
+
+\begin{itemize}
+\item If SNR is high, will throughput always be high?
+\end{itemize}
+
+Reason:
+
+\begin{itemize}
+\item Network congestion affects throughput.
+\end{itemize}
+
+Applications:
+
+\begin{itemize}
+\item 5G scheduling
+\item Adaptive modulation
+\item Network planning
+\end{itemize}
+
+\subsubsection*{Weather Prediction}
+
+Random variables:
+
+\begin{itemize}
+\item $X$ = Rainfall
+\item $Y$ = Temperature
+\end{itemize}
+
+Application:
+
+\begin{itemize}
+\item Weather forecasting.
+\end{itemize}
+
+\subsubsection*{Drone Delivery}
+
+Random variables:
+
+\begin{itemize}
+\item $X$ = Wind Speed
+\item $Y$ = Delivery Time
+\end{itemize}
+
+Application:
+
+\begin{itemize}
+\item Logistics and UAV systems.
+\end{itemize}
+
+\subsubsection*{Dice Example}
+
+Random variables:
+
+\begin{itemize}
+\item $X$ = outcome of first die
+\item $Y$ = outcome of second die
+\end{itemize}
+
+Example conditions:
+
+\begin{itemize}
+\item $X + Y = 7$
+\item $X > Y$
+\end{itemize}
+
+This requires \textbf{joint PMF analysis}.
+
+\hrule
+\vspace{0.5cm}
+
+\section*{3. Core Results}
+
+\subsection*{Discrete Case – Joint PMF}
+
+\subsubsection*{Definition}
+
+The \textbf{Joint Probability Mass Function (Joint PMF)} gives the probability that:
+
+\[
+X = x \quad \text{and} \quad Y = y
+\]
+
+\[
+p_{X,Y}(x,y) = P(X = x, Y = y)
+\]
+
+This function represents the probability distribution for \textbf{two discrete random variables simultaneously}.
+
+\subsection*{Joint PMF Table Representation}
+
+The joint PMF for discrete variables can be represented using a \textbf{table}.
+
+\begin{center}
+\begin{tabular}{cccc}
+\toprule
+$Y \backslash X$ & $x_1$ & $x_2$ & $\dots$ \\
+\midrule
+$y_1$ & $p(x_1,y_1)$ & $p(x_2,y_1)$ & $\dots$ \\
+$y_2$ & $p(x_1,y_2)$ & $p(x_2,y_2)$ & $\dots$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Each entry represents:
+
+\[
+P(X = x_i, Y = y_j)
+\]
+
+\subsection*{Continuous Case – Joint PDF}
+
+For continuous random variables, probability is represented using the \textbf{Joint Probability Density Function (PDF)}.
+
+\[
+f_{X,Y}(x,y)
+\]
+
+The probability over a region is obtained by integration.
+
+\hrule
+\vspace{0.5cm}
+
+\newpage
+\section*{4. Analytical Development}
+
+\subsection*{Geometric Interpretation (Continuous Case)}
+
+For continuous variables:
+
+\begin{itemize}
+\item Probability corresponds to the \textbf{area under the joint density surface}.
+\item The region in the $(x)-(y)$ plane determines the probability.
+\end{itemize}
+
+Thus,
+
+\[
+P((X,Y) \in R)
+\]
+
+is obtained by integrating the joint PDF over region $R$.
+
+\hrule
+\vspace{0.5cm}
+
+\section*{5. Illustrative Applications}
+
+\subsection*{Example: Rolling Two Dice}
+
+Random variables:
+
+\begin{itemize}
+\item $X$ = result of die 1
+\item $Y$ = result of die 2
+\end{itemize}
+
+Sample space size:
+
+\[
+6 \times 6 = 36
+\]
+
+Each ordered pair:
+
+\[
+(X,Y) = (1,1), (1,2), \dots, (6,6)
+\]
+
+Joint probabilities are represented in a \textbf{Joint PMF table}.
+
+\hrule
+\vspace{0.5cm}
+
+\newpage
+\section*{6. Joint Cumulative Distribution Function (Joint CDF)}
+
+\subsection*{Definition}
+
+The \textbf{Joint CDF} of two random variables $X$ and $Y$ is defined as:
+
+\[
+F_{X,Y}(x,y) = P(X \le x, Y \le y)
+\]
+
+This represents the probability that:
+
+\begin{itemize}
+\item $X$ is less than or equal to $x$
+\item $Y$ is less than or equal to $y$
+\end{itemize}
+
+\subsection*{Continuous Case}
+
+For continuous variables, the joint CDF is obtained from the joint PDF.
+
+Conceptually:
+
+\begin{itemize}
+\item Integrate the joint density over the region
+\end{itemize}
+
+\[
+(-\infty, x] \times (-\infty, y]
+\]
+
+\subsection*{Discrete Case}
+
+For discrete random variables:
+
+\[
+F_{X,Y}(x,y)
+=
+\sum_{x_i \le x} \sum_{y_j \le y}
+p_{X,Y}(x_i,y_j)
+\]
+
+The CDF is obtained by \textbf{summing the joint PMF values} up to $x$ and $y$.
+
+\hrule
+\vspace{0.5cm}
+
+\section*{7. Properties of the Joint CDF}
+
+The lecture introduces \textbf{properties of the Joint CDF}.
+
+Key aspects:
+
+\begin{itemize}
+\item Defined for all real values of $x$ and $y$
+\item Represents cumulative probability
+\item Applicable to both discrete and continuous cases
+\end{itemize}
+
+\hrule
+\vspace{0.5cm}
+
+\section*{8. Structural Relationships}
+
+The lecture follows the conceptual progression:
+
+\begin{enumerate}
+\item Motivation for joint random variables
+\item Discrete case – Joint PMF
+\item Joint PMF table representation
+\item Dice example
+\item Continuous case – Joint PDF
+\item Geometric interpretation
+\item Joint CDF definition
+\item Continuous case of CDF
+\item Discrete case of CDF
+\item Properties of Joint CDF
+\end{enumerate}
+
+This structure builds from \textbf{basic motivation → mathematical formulation → examples → properties}.
+
+\hrule
+\vspace{0.5cm}
+
+\newpage
+\section*{9. Consolidated Summary}
+
+\subsection*{Key Concepts}
+
+\begin{itemize}
+\item Joint random variables model \textbf{multiple random variables simultaneously}.
+\item Relationships between variables may exist (correlation).
+\end{itemize}
+
+\subsection*{Important Functions}
+
+\textbf{Joint PMF (Discrete Case)}
+
+\[
+p_{X,Y}(x,y) = P(X=x, Y=y)
+\]
+
+\textbf{Joint PDF (Continuous Case)}
+
+\[
+f_{X,Y}(x,y)
+\]
+
+\textbf{Joint CDF}
+
+\[
+F_{X,Y}(x,y) = P(X \le x, Y \le y)
+\]
+
+\subsection*{Example Contexts from the Lecture}
+
+\begin{itemize}
+\item Smart transportation
+\item Wireless network performance
+\item Weather prediction
+\item Drone delivery
+\item Rolling two dice
+\end{itemize}
+
+\end{document}
