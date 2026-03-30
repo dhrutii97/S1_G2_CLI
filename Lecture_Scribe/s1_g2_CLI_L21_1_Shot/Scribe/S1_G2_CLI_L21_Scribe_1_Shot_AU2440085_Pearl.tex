@@ -1,0 +1,409 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath, amssymb}
+
+\title{CSE 400 Lecture Scribe\\
+Lecture 21 \& 22: Inequalities and Tail Bounds}
+\date{}
+
+\begin{document}
+\maketitle
+
+\section{Tail and Motivation of Tail Bounds}
+
+\subsection{Definition of Tail}
+The tail of a random variable $X$ is:
+\[
+P\{X > x\}
+\]
+
+\subsection{Why Do We Care About Tails?}
+\begin{itemize}
+\item Jobs delayed more than 24 hours
+\item Packets dropped due to full buffer
+\end{itemize}
+
+\textbf{Key Idea:}
+\begin{itemize}
+\item Mean $\rightarrow$ average behavior (easy)
+\item Tail $\rightarrow$ rare extreme events (hard)
+\end{itemize}
+
+\subsection{Why Are Tails Hard to Compute?}
+\begin{itemize}
+\item Requires summing many small probabilities
+\end{itemize}
+
+\subsection{Tail Examples}
+
+\textbf{Example 1: Load Balancing}
+\begin{itemize}
+\item Distribute $n$ jobs among $n$ servers randomly
+\item Let $X \sim \text{Binomial}(n,p)$
+\item Tail probability:
+\[
+P\{X > k\} = \sum \binom{n}{i} p^i (1-p)^{n-i}
+\]
+\end{itemize}
+
+This is a tail event (rare overload).
+
+\textbf{Example 2: Poisson Arrivals}
+\begin{itemize}
+\item Jobs arrive with rate $\lambda$
+\item $X \sim \text{Poisson}(\lambda)$
+\item Tail probability:
+\[
+P\{X > k\} = \sum e^{-\lambda} \frac{\lambda^x}{x!}
+\]
+\end{itemize}
+
+This represents a tail event (sudden spike in load).
+
+\subsection{Why Tail Bounds?}
+\begin{itemize}
+\item Exact computation is complicated:
+\[
+P\{X > k\} = \sum (\text{long sums})
+\]
+\end{itemize}
+
+\textbf{Idea:}
+\begin{itemize}
+\item Instead of exact value $\rightarrow$ find an upper bound
+\item Easier to compute
+\item Still gives a guarantee
+\end{itemize}
+
+\subsection{Running Example}
+\begin{itemize}
+\item $X \sim \text{Binomial}(n, 1/2)$
+\item Mean:
+\[
+E[X] = \frac{n}{2}
+\]
+\end{itemize}
+
+Question:
+\[
+P(X > 3n/4)
+\]
+
+\section{Markov's Inequality}
+
+\subsection{Definition}
+For non-negative random variable $X$:
+\[
+P(X > a) \leq \frac{E[X]}{a}
+\]
+
+\subsection{Key Idea}
+\begin{itemize}
+\item Uses only the mean
+\item Large values are rare
+\end{itemize}
+
+\subsection{Proof}
+\[
+E[X] = \sum x p_X(x)
+\]
+
+Consider only $x > a$:
+\[
+E[X] \geq \sum_{x>a} x p_X(x)
+\]
+
+Replace $x$ by $a$:
+\[
+E[X] \geq \sum_{x>a} a p_X(x) = a P(X > a)
+\]
+
+Thus:
+\[
+P(X > a) \leq \frac{E[X]}{a}
+\]
+
+\subsection{Example (Income Distribution)}
+\begin{itemize}
+\item Average income = 10,000
+\item Threshold = 50,000
+\end{itemize}
+
+\[
+P(X > 50,000) \leq \frac{10,000}{50,000} = 0.2
+\]
+
+At most 20\% people can earn 50,000
+
+\subsection{Solved Example 1 (Exam Grades)}
+\begin{itemize}
+\item $E[X] = 70$, threshold $a = 90$
+\end{itemize}
+
+\[
+P(X > 90) \leq \frac{70}{90}
+\]
+
+Result:
+\[
+P(X > 90) < 0.778
+\]
+
+\subsection{Solved Example 2 (Server Load)}
+\begin{itemize}
+\item $E[X] = 5000$, $a = 20000$
+\end{itemize}
+
+\[
+P(X > 20000) \leq \frac{5000}{20000} = 0.25
+\]
+
+At most 25\% chance
+
+\section{Chebyshev's Inequality}
+
+\subsection{Definition}
+\[
+P(|X - \mu| > a) \leq \frac{\text{Var}(X)}{a^2}
+\]
+
+\subsection{Key Idea}
+\begin{itemize}
+\item Uses mean + variance
+\item Controls deviation from mean
+\end{itemize}
+
+\subsection{Proof}
+Apply Markov to $(X - \mu)^2$:
+\[
+P(|X - \mu| > a) = P((X - \mu)^2 > a^2)
+\]
+\[
+\leq \frac{E[(X - \mu)^2]}{a^2} = \frac{\text{Var}(X)}{a^2}
+\]
+
+\subsection{Running Example}
+\begin{itemize}
+\item $X \sim \text{Binomial}(n, 1/2)$
+\end{itemize}
+
+\[
+P(X > 3n/4) \leq P(|X - n/2| > n/4)
+\]
+
+Bound decreases as $n$ increases
+
+\subsection{Real-Life Example}
+\begin{itemize}
+\item Mean = 70, std = 10
+\item Deviation = 30
+\end{itemize}
+
+\[
+P(|X - 70| > 30) \leq \frac{10^2}{30^2} = \frac{100}{900} = \frac{1}{9}
+\]
+
+At most $\frac{1}{9}$ students are far from mean
+
+\subsection{Solved Example}
+\begin{itemize}
+\item $\mu = 70$, $\sigma = 5 \Rightarrow \sigma^2 = 25$
+\item $X > 90 \Rightarrow |X - 70| > 20$
+\end{itemize}
+
+\[
+P(X > 90) \leq \frac{25}{20^2}
+\]
+
+\section{Chernoff Bound and Poisson Tail}
+
+\subsection{Key Idea}
+\begin{itemize}
+\item Uses exponential transformation
+\item Stronger than Markov and Chebyshev
+\item Exponential decay of tail
+\end{itemize}
+
+\subsection{Core Trick}
+\[
+P(X > a) = P(e^{tX} > e^{ta})
+\]
+
+Apply Markov:
+\[
+P(X > a) \leq \frac{E[e^{tX}]}{e^{ta}}
+\]
+
+\subsection{Final Form}
+\[
+P(X > a) \leq \min_{t>0} \frac{E[e^{tX}]}{e^{ta}}
+\]
+
+\subsection{Lower Tail}
+\[
+P(X < a) \leq \min_{t<0} \frac{E[e^{tX}]}{e^{ta}}
+\]
+
+\subsection{Poisson Tail Bound}
+For $X \sim \text{Poisson}(\lambda)$:
+\[
+E[e^{tX}] = e^{\lambda(e^t - 1)}
+\]
+
+\[
+P(X > a) < e^{\lambda(e^t - 1) - at}
+\]
+
+\subsection{Solved Example 1 (Binomial Lower Tail)}
+\begin{itemize}
+\item $X \sim \text{Binomial}(20, 0.5)$, $\mu = 10$
+\item Want $P(X < 0)$
+\end{itemize}
+
+Steps:
+\begin{enumerate}
+\item $0 = (1 - \delta)\mu \Rightarrow \delta = 1$
+\item Use bound:
+\[
+P(X < (1 - \delta)\mu) < e^{-\mu \delta^2 / 2}
+\]
+\item Substitute:
+\[
+P(X < 0) < e^{-10/2} = e^{-5}
+\]
+\end{enumerate}
+
+Result:
+\[
+P(X < 0) < 0.0067
+\]
+
+\subsection{Solved Example 2 (Derivation)}
+Steps:
+\begin{enumerate}
+\item Choose $t < 0$:
+\[
+P(X < a) = P(tX > ta)
+\]
+\item Exponentiate:
+\[
+P(e^{tX} > e^{ta})
+\]
+\item Apply Markov:
+\[
+\leq \frac{E[e^{tX}]}{e^{ta}}
+\]
+\item Minimize over $t < 0$
+\end{enumerate}
+
+\section{Jensen's Inequality}
+
+\subsection{Convex Functions}
+A function $g$ is convex if:
+\[
+g''(x) > 0
+\]
+
+\subsection{Statement}
+For convex $g$:
+\[
+g(E[X]) \leq E[g(X)]
+\]
+
+\subsection{Example (Verification)}
+Given:
+\begin{itemize}
+\item $X = 2$ w.p. 0.5, $X = 4$ w.p. 0.5
+\item $g(x) = x^2$
+\end{itemize}
+
+Steps:
+\begin{enumerate}
+\item $E[X] = 3$
+\item $g(E[X]) = 9$
+\item $E[g(X)] = 0.5(4) + 0.5(16) = 10$
+\end{enumerate}
+
+Result:
+\[
+g(E[X]) = 9 < 10 = E[g(X)]
+\]
+
+\subsection{Application}
+\[
+E[X^a] \geq (E[X])^a
+\]
+for $a > 1$
+
+\section{Case Study and System-Level Understanding}
+
+\subsection{Problem Setting}
+\begin{itemize}
+\item Demand $X$: requests/sec
+\item Capacity $C$
+\item Failure event:
+\[
+X > C
+\]
+\end{itemize}
+
+Requirement:
+\[
+P(X > C) < 0.01
+\]
+
+\subsection{Applying Inequalities}
+
+\textbf{(a) Markov}
+\begin{itemize}
+\item Only mean known ($\mu = 10,000$)
+\end{itemize}
+
+Result:
+\[
+C = 1,000,000
+\]
+
+\textbf{(b) Chebyshev}
+\begin{itemize}
+\item Mean = 10,000, std = 2,000
+\end{itemize}
+
+\[
+\frac{2000^2}{(C - 10000)^2} < 0.01
+\]
+
+Result:
+\[
+C = 30,000
+\]
+
+\textbf{(c) Chernoff}
+\begin{itemize}
+\item Full distribution known (Poisson)
+\end{itemize}
+
+\[
+P(X > C) < e^{\cdots}
+\]
+
+Solve:
+\[
+C = 14,500
+\]
+
+\subsection{Final Insight}
+
+\begin{tabular}{|c|c|c|}
+\hline
+Inequality & Information Used & Capacity \\
+\hline
+Markov & Mean only & 1,000,000 \\
+Chebyshev & Mean + Variance & 30,000 \\
+Chernoff & Full distribution & 14,500 \\
+\hline
+\end{tabular}
+
+\subsection{Golden Rule}
+More statistical information = Tighter bounds = Lower hardware costs
+
+\end{document}
