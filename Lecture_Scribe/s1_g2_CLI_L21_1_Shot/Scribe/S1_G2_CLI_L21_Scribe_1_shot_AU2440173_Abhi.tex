@@ -1,0 +1,322 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\title{Lecture Scribe: Inequalities and Tail Bounds}
+\date{}
+\begin{document}
+\maketitle
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Definitions and Notation}
+\begin{itemize}
+
+    \item\textbf {Tail of a Random Variable}
+    \begin{center}
+        $P(X > x)$
+    \end{center}
+
+    \item\textbf {Binomial Distribution}
+    \begin{center}
+        $X \sim \text{Binomial}(n,p)$
+    \end{center}
+
+    \item \textbf{Poisson Distribution}
+    \begin{center}
+        $X \sim \text{Poisson}(\lambda)$
+    \end{center}
+
+    \item \textbf{Expectation (Mean)}
+    \begin{center}
+        $E[X]$
+    \end{center}
+
+    \item\textbf{Variance}
+    \begin{center}
+        $\mathrm{Var}(X)$
+    \end{center}
+
+    \item\textbf{ Tail Probability (Binomial)}
+    \begin{center}
+        $P(X > k) = \sum \binom{n}{i} p^i (1-p)^{n-i}$
+    \end{center}
+
+    \item \textbf {Tail Probability (Poisson)}
+    \begin{center}
+        $P(X > k) = \sum \frac{e^{-\lambda}\lambda^i}{i!}$
+    \end{center}
+
+\end{itemize}
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Assumptions}
+
+\begin{itemize}
+    \item Random variable $X \geq 0$ (for Markov’s Inequality)
+    \item Finite mean $E[X]$ exists
+    \item Finite variance $\mathrm{Var}(X)$ exists (for Chebyshev’s Inequality)
+    \item Independence in binomial examples
+    \item Poisson arrivals follow rate $\lambda$
+    \item Convex function $g(x)$ satisfies:
+    \[
+    g(ax_1 + (1-a)x_2) \leq a g(x_1) + (1-a) g(x_2)
+    \]
+\end{itemize}
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Theorem / Results}
+
+\textbf{Markov’s Inequality}
+\[
+P(X > a) \leq \frac{E[X]}{a}
+\]
+\\
+\noindent\rule{\textwidth}{0.4pt}
+\textbf{Chebyshev’s Inequality}
+\[
+P(|X - \mu| > a) \leq \frac{\mathrm{Var}(X)}{a^2}
+\]
+\\
+\noindent\rule{\textwidth}{0.4pt}
+\textbf{Chernoff Bound (Upper Tail)}
+\[
+P(X > a) \leq \min_{t > 0} \frac{E[e^{tX}]}{e^{ta}}
+\]
+\\
+\noindent\rule{\textwidth}{0.4pt}
+\textbf{Chernoff Bound (Lower Tail)}
+\[
+P(X < a) \leq \min_{t < 0} \frac{E[e^{tX}]}{e^{ta}}
+\]
+\\
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Chernoff Bound (Poisson)}
+
+    \begin{center}
+        $P(X > a) < e^{\lambda (e^t - 1) - at}$
+    \end{center}
+
+    \item Optimized at
+    \begin{center}
+        $t = \ln\left(\frac{a}{\lambda}\right)$
+    \end{center}
+\noindent\rule{\textwidth}{0.4pt}
+\textbf{Jensen’s Inequality}
+\[
+g(E[X]) \leq E[g(X)]
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Proof / Derivation}
+
+\textbf{Markov’s Inequality (Proof Idea)}
+\[
+E[X] = \sum_x x \cdot p_X(x)
+\]
+\[
+\geq \sum_{x \geq a} x \cdot p_X(x)
+\]
+\[
+\geq a \sum_{x \geq a} p_X(x) = a P(X > a)
+\]
+\[
+\Rightarrow P(X > a) \leq \frac{E[X]}{a}
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\textbf{Chebyshev’s Inequality (Proof Idea)}
+\\
+Apply Markov on $(X - \mu)^2$:
+\[
+P(|X - \mu| > a) = P((X - \mu)^2 > a^2)
+\]
+\[
+\leq \frac{E[(X - \mu)^2]}{a^2} = \frac{\mathrm{Var}(X)}{a^2}
+\]
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Chernoff Bound (Derivation)}
+
+\begin{center}
+    $P(X > a) = P(e^{tX} > e^{ta})$
+\end{center}
+
+\textbf{Apply Markov:}
+
+\begin{center}
+    $P(e^{tX} > e^{ta}) \leq \frac{E[e^{tX}]}{e^{ta}}$
+\end{center}
+
+\begin{center}
+    $P(X > a) \leq \min_{t>0} \frac{E[e^{tX}]}{e^{ta}}$
+\end{center}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\section*{Chernoff Lower Tail Derivation}
+
+\begin{center}
+    $P(X < a) = P(tX > ta), \quad t < 0$
+\end{center}
+
+\begin{center}
+    $= P(e^{tX} > e^{ta})$
+\end{center}
+
+\begin{center}
+    $\leq \frac{E[e^{tX}]}{e^{ta}}$
+\end{center}
+
+\begin{center}
+    $P(X < a) \leq \min_{t<0} \frac{E[e^{tX}]}{e^{ta}}$
+\end{center}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\section*{Jensen’s Inequality (From Convexity)}
+
+\textbf{Convex combination:}
+
+\begin{center}
+    $g\left(\sum a_i x_i\right) \leq \sum a_i g(x_i)$
+\end{center}
+\\
+\textbf{Expectation form:}
+
+\begin{center}
+    $g(E[X]) \leq E[g(X)]$
+\end{center}
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Worked Examples}
+\textbf{Markov Example: Exam Grades}
+
+\begin{itemize}
+    \item $E[X] = 70, \; a = 90$
+\end{itemize}
+
+\begin{center}
+    $P(X > 90) \leq \frac{70}{90}$
+\end{center}
+
+\begin{center}
+    $P(X > 90) < 0.778$
+\end{center}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{Markov Example: Server Load}
+
+\begin{itemize}
+    \item $E[X] = 5000, \; a = 20000$
+\end{itemize}
+
+\begin{center}
+    $P(X > 20000) \leq \frac{5000}{20000}$
+\end{center}
+
+\begin{center}
+    $P(X > 20000) < 0.25$
+\end{center}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{Chebyshev Example: Exam Grades}
+
+\begin{itemize}
+    \item $\mu = 70, \; \sigma = 5 \Rightarrow \sigma^2 = 25$
+    \item $a = 20$
+\end{itemize}
+
+\begin{center}
+    $P(|X - 70| > 20) \leq \frac{25}{400}$
+\end{center}
+
+\begin{center}
+    $P(X > 90) < 0.0625$
+\end{center}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{Chebyshev Example: Network Latency}
+
+\begin{itemize}
+    \item $\mu = 50, \; \sigma^2 = 16, \; a = 20$
+\end{itemize}
+
+\begin{center}
+    $P(|X - 50| > 20) \leq \frac{16}{400}$
+\end{center}
+
+\begin{center}
+    $P(|X - 50| > 20) < 0.04$
+\end{center}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{Chernoff Example: Binomial Lower Tail}
+
+\begin{itemize}
+    \item $X \sim \text{Binomial}(20, 0.5), \; \mu = 10$
+\end{itemize}
+
+\begin{center}
+    $\delta = 1$
+\end{center}
+
+\begin{center}
+    $P(X < 0) < e^{-\mu \delta^2 / 2}$
+\end{center}
+
+\begin{center}
+    $P(X < 0) < e^{-5}$
+\end{center}
+
+\begin{center}
+    $P(X < 0) < 0.0067$
+\end{center}
+
+\vspace{1em}
+\hrule
+\vspace{1em}
+
+\textbf{Jensen Example}
+
+\begin{itemize}
+    \item $X = 1, 3$ with probability $0.5$
+\end{itemize}
+
+\begin{center}
+    $E[X] = 2$
+\end{center}
+
+\begin{center}
+    $g(E[X]) = 2^2 = 4$
+\end{center}
+
+\begin{center}
+    $E[g(X)] = 0.5(1^2) + 0.5(3^2) = 5$
+\end{center}
+
+\begin{center}
+    $g(E[X]) < E[g(X)]$
+\end{center}
+\noindent\rule{\textwidth}{0.4pt}
+\section*{Conclusion}
+
+\begin{itemize}
+
+    \item Tail probability $P(X > x)$
+    \item Exact computation is complex.
+    \item Markov uses mean.
+    \item Chebyshev uses mean and variance.
+        \item Chernoff uses exponential transformation.
+        \item Jensen relates convex functions and expectation.
+
+\end{itemize}
+
+\end{document}
