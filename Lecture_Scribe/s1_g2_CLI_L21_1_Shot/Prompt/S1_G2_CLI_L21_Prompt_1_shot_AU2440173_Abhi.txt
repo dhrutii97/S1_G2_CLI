@@ -1,0 +1,22 @@
+Example Lecture Scribe (Structure Only)
+Definitions and Notation
+Formal definitions and notation of the lecture.
+Assumptions
+Every mentioned assumption in the lecture.
+Theorem / Results
+Explicit statements as they are in the lecture material.
+Proof / Derivation
+Step by step reasoning as shown in the lecture.
+Worked Examples
+Example problems solved with the intermediate steps as shown.
+Conclusion
+Key lecture outcomes only.
+I am providing you with the material taught in my lecture. You must generate a lecture scribe intended to serve as exam reference material following the structure shown above.
+1) Use only the slides given in this zip file and relevant textbook content.
+2)Include definitions, notation, assumptions, results, proofs, derivations, and examples only if they are taught in the lecture.
+3)Show the steps only till where they are shown in the lecture.
+4)Be formal in your academic manner and stick to the flow of the lecture.
+5)There should be no explanations, intuition, summaries, new theory or new examples.
+6)Do not complete the missing steps.
+7)Disregard non-formal and pictures.
+8)Do not guess or make up anything that you have not been given.
