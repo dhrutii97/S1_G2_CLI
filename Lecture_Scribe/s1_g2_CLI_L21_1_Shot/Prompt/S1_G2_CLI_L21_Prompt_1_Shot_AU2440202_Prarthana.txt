@@ -1,0 +1,2 @@
+Prompt of Lecture Scribe 21: 
+Generate a exam-ready lecture scribe using the given example of the structure. Include all the clear explanations, detailed derivations and calculations given in the lecture pdf. Also include all numerical solved given  in the slides. Give concise revision notes, well structured and easy for revision and avoid repetition and extra content. Include each topic and do not skip any important point to include in the lecture scribe.
