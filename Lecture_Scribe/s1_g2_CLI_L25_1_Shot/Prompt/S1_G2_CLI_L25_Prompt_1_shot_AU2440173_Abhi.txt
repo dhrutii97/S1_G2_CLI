@@ -1,0 +1,21 @@
+List of all formulae used in solving the tutorial questions, written in a clear and compact form.
+
+I am giving you a tutorial sheet. Using the contents of this document, you need to create a formula sheet that will be used as exam reference material.
+
+RULES ARE→
+
+Refer to the tutorial sheet provided and textbook material.
+
+Extract only those formulae that are actually used in solving the questions.
+
+Do not include any derivations, steps, explanations, or theory.
+
+Add no further formula not necessary to the solutions.
+
+Write each formula in its standard mathematical form with correct notation.
+
+Do not guess or make up anything that is not present or required.
+
+Ignore non-formal text, statements, and images.
+
+Make the output to be brief, organized and formulaic.
