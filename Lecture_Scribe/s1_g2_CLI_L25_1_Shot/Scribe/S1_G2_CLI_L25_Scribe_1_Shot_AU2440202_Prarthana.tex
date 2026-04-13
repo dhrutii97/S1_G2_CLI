@@ -1,0 +1,362 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\begin{center}
+\textbf{\Large Lecture Scribe} \\[0.3cm]
+\textbf{Course Name:} CSE 400: Fundamentals of Probability in Computing \\[0.2cm]
+\textbf{Lecture Number:} L25 \\[0.2cm]
+\textbf{Lecture Topic:} Inequalities -- Problem Solving
+\end{center}
+
+\vspace{0.5cm}
+
+\section*{Q1}
+
+\subsection*{(a)}
+
+\textbf{Given:} $E[X] = 40000$
+
+\textbf{Formula Used:} Markov’s Inequality
+\[
+P(X \ge a) \le \frac{E[X]}{a}
+\]
+
+\textbf{Reason:} Applicable since $X \ge 0$ and probability is of the form $P(X \ge a)$.
+
+\textbf{Application:}
+\[
+P(X \ge 120000) \le \frac{40000}{120000} = \frac{1}{3}
+\]
+
+\textbf{Answer:}
+\[
+P(X \ge 120000) \le \frac{1}{3}
+\]
+
+\subsection*{(b)}
+
+\textbf{Reason for not using formula:} Markov’s inequality applies only to $P(X \ge a)$, not to lower tail $P(X < a)$.
+
+\textbf{Answer:} Markov’s inequality \textbf{cannot be used}.
+
+\section*{Q2}
+
+\textbf{Given:} $\mu = 100,\; \sigma^2 = 4$
+
+Defective condition:
+\[
+|X - \mu| \ge 6
+\]
+
+\subsection*{(a)}
+
+\textbf{Formula Used:} Chebyshev’s Inequality
+\[
+P(|X - \mu| \ge a) \le \frac{\sigma^2}{a^2}
+\]
+
+\textbf{Reason:} Used for bounding deviation from mean.
+
+\textbf{Application:}
+\[
+P(|X - 100| \ge 6) \le \frac{4}{36} = \frac{1}{9}
+\]
+
+\textbf{Answer:}
+\[
+P(\text{defective}) \le \frac{1}{9}
+\]
+
+\subsection*{(b)}
+
+\textbf{Formula Used:}
+\[
+\text{Expected defective} = n \cdot P(\text{defective})
+\]
+
+\textbf{Reason:} Expected value of count = total $\times$ probability.
+
+\textbf{Application:}
+\[
+10000 \cdot \frac{1}{9} \approx 1111
+\]
+
+\textbf{Answer:} Maximum $\approx$ \textbf{1111 defective resistors}
+
+\section*{Q3}
+
+\textbf{Given:} $0 \le Y \le 1,\; E[Y] = \mu$
+
+\textbf{Formulas Used:}
+
+1. Convexity property:
+\[
+e^{\lambda x_1 + (1-\lambda)x_2} \le \lambda e^{x_1} + (1-\lambda)e^{x_2}
+\]
+
+2. Linearity of expectation:
+\[
+E[aX + bY] = aE[X] + bE[Y]
+\]
+
+\textbf{Reason:}
+\begin{itemize}
+\item $e^x$ is convex
+\item $Y \in [0,1]$ implies convex combination
+\end{itemize}
+
+\textbf{Steps:}
+\[
+e^{tY} \le 1 - Y + Y e^t
+\]
+
+Taking expectation:
+\[
+E[e^{tY}] \le 1 - E[Y] + e^t E[Y]
+\]
+
+Substitute $E[Y] = \mu$:
+
+\textbf{Answer:}
+\[
+E[e^{tY}] \le 1 - \mu + \mu e^t
+\]
+
+\section*{Q4}
+
+\textbf{Given:} $g(x) = x^a,\; a > 1$
+
+\textbf{Formulas Used:}
+
+1. Second derivative:
+\[
+g''(x) = a(a-1)x^{a-2}
+\]
+
+2. Jensen’s Inequality:
+\[
+g(E[X]) \le E[g(X)]
+\]
+
+\textbf{Reason:}
+\begin{itemize}
+\item $g''(x) > 0 \Rightarrow$ convex
+\item Apply Jensen on convex function
+\end{itemize}
+
+\textbf{Application:}
+\[
+(E[X])^a \le E[X^a]
+\]
+
+\textbf{Answer:}
+\[
+E[X^a] \ge (E[X])^a
+\]
+
+\section*{Q5}
+
+\textbf{Formulas Used:}
+
+1. Markov’s Inequality:
+\[
+P(Z \ge a) \le \frac{E[Z]}{a}
+\]
+
+2. Variance definition:
+\[
+E[(X-\mu)^2] = \sigma^2
+\]
+
+\textbf{Reason:} Apply Markov on non-negative variable:
+\[
+Z = (X - \mu)^2
+\]
+
+\textbf{Steps:}
+\[
+P(|X - \mu| \ge k\sigma) = P((X-\mu)^2 \ge k^2\sigma^2)
+\]
+
+\[
+\le \frac{E[(X-\mu)^2]}{k^2\sigma^2} = \frac{\sigma^2}{k^2\sigma^2}
+\]
+
+\textbf{Answer:}
+\[
+P(|X - \mu| \ge k\sigma) \le \frac{1}{k^2}
+\]
+
+\section*{Q6}
+
+\subsection*{(a)}
+
+\textbf{Formula Used:} Markov’s Inequality
+\[
+P(X \ge a) \le \frac{E[X]}{a}
+\]
+
+\textbf{Application:}
+\[
+P(X \ge 1000) \le \frac{500}{1000} = \frac{1}{2}
+\]
+
+\textbf{Answer:}
+\[
+\frac{1}{2}
+\]
+
+\subsection*{(b)}
+
+\textbf{Formula Used:} Chebyshev’s Inequality
+\[
+P(|X - \mu| \ge a) \le \frac{\sigma^2}{a^2}
+\]
+
+\textbf{Application:}
+\[
+P(|X - 500| \ge 100) \le \frac{100}{10000} = \frac{1}{100}
+\]
+
+\[
+P(|X - 500| < 100) \ge 1 - \frac{1}{100} = \frac{99}{100}
+\]
+
+\textbf{Answer:}
+\[
+\ge 0.99
+\]
+
+\section*{Q7}
+
+\textbf{Formulas Used:}
+
+1. MGF:
+\[
+E[e^{tX_i}] = \frac{e^t + e^{-t}}{2}
+\]
+
+2. Series expansion:
+\[
+e^t = \sum \frac{t^n}{n!}
+\]
+
+3. Inequality:
+\[
+(2n)! \ge n!2^n
+\]
+
+\textbf{Reason:} Used to bound MGF using series expansion.
+
+\textbf{Results:}
+\[
+E[e^{tX_i}] \le e^{t^2/2}
+\]
+
+\[
+E[e^{tS_n}] \le e^{nt^2/2}
+\]
+
+\section*{Q8}
+
+\textbf{Formulas Used:}
+
+1. Expectation:
+\[
+E[X] = \sum E[X_i]
+\]
+
+2. Variance:
+\[
+Var(X) = \sum Var(X_i) + 2\sum Cov(X_i,X_j)
+\]
+
+3. Chebyshev:
+\[
+P(|X-\mu| \ge a) \le \frac{Var(X)}{a^2}
+\]
+
+\textbf{Results:}
+\[
+E[X] \approx 50.25
+\]
+
+\[
+Var(X) \approx 25.126
+\]
+
+\[
+P(X \le 30) \le \frac{25.126}{(20.25)^2} \approx 0.061
+\]
+
+\section*{Q9}
+
+\textbf{Formula Used:} Jensen’s Inequality
+\[
+\frac{1}{n}\sum f(x_i) \ge f\left(\frac{1}{n}\sum x_i\right)
+\]
+
+\textbf{Application:}
+\[
+\sum \sqrt{i^2+1} \ge \frac{n}{2}\sqrt{n^2 + 2n + 5}
+\]
+
+\textbf{Answer:}
+\[
+\sum_{i=1}^n \sqrt{i^2+1} \ge \frac{n}{2}\sqrt{n^2 + 2n + 5}
+\]
+
+\section*{Q10}
+
+\textbf{Given:} $X \sim \text{Poisson}(20)$
+
+\subsection*{(a) Markov}
+
+\[
+P(X \ge a) \le \frac{E[X]}{a}
+\]
+
+\[
+P(X \ge 26) \le \frac{20}{26} = \frac{10}{13}
+\]
+
+\subsection*{(b) Chebyshev (Cantelli)}
+
+\[
+P(X \ge \mu + t) \le \frac{\sigma^2}{\sigma^2 + t^2}
+\]
+
+\[
+\le \frac{20}{56} = \frac{5}{14}
+\]
+
+\subsection*{(c) Chernoff Bound}
+
+\[
+P(X \ge a) \le \inf_{t>0} \frac{E[e^{tX}]}{e^{ta}}
+\]
+
+MGF:
+\[
+E[e^{tX}] = e^{20(e^t - 1)}
+\]
+
+Optimization:
+\[
+t = \ln(1.3)
+\]
+
+\[
+P(X \ge 26) \le e^{6 - 26\ln(1.3)} \approx 0.439
+\]
+
+\textbf{Final Answers:}
+\begin{itemize}
+\item Markov: $\approx 0.769$
+\item Chebyshev: $\approx 0.357$
+\item Chernoff: $\approx 0.439$
+\end{itemize}
+
+\end{document}
